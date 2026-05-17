@@ -83,7 +83,7 @@ function buildDFSFrames() {
             explored: exploredCount,
         });
 
-        if (isSol) return path;
+        if (isSol) return [...path, s]; // full path including goal
 
         const nexts = successors(s);
         for (const { state: ns, move: mv } of nexts) {
@@ -108,8 +108,8 @@ function buildDFSFrames() {
         return null;
     }
 
-    dfs(INITIAL, [], null);
-    return frames;
+    const solutionPath = dfs(INITIAL, [], null);
+    return { frames, path: solutionPath || null };
 }
 
 // ---------- BFS FRAME BUILDER ----------
