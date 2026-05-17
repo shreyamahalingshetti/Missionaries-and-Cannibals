@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Missionaries and Cannibals - AI Search Visualization</title>
+    <link rel="stylesheet" href="style.css">
+    <meta name="description" content="Missionaries and Cannibals problem solver using DFS, BFS, and A* search algorithms.">
+</head>
+<body>
+    <main class="container">
+        <!-- Hero Section -->
+        <section class="hero-section simple-panel">
+            <h1>Missionaries and Cannibals Problem Solver</h1>
+            <p class="subtitle">Visualization using DFS, BFS and A* Search Algorithms</p>
+        </section>
+
+        <!-- Legend -->
+        <div class="legend">
+            <span>👨 = Missionaries</span>
+            <span>😈 = Cannibals</span>
+            <span>🚣 = Boat</span>
+        </div>
+
+        <!-- Visualization Section -->
+        <section class="visualization-section simple-panel">
+            <div class="vis-layout">
+                <div class="sim-column">
+                    <div class="simulation-area">
+                        <div class="riverbank left-bank" id="left-bank">
+                            <div class="bank-label">LEFT BANK</div>
+                            <div class="characters-container" id="left-characters">
+                                <!-- Characters will be dynamically injected here -->
+                            </div>
+                        </div>
+                        
+                        <div class="river">
+                            <div class="bank-label">🌊 RIVER 🌊</div>
+                            <div class="boat-area">
+                                <div class="boat-label">Boat</div>
+                                <div class="boat" id="boat">🚣</div>
+                            </div>
+                        </div>
+                        
+                        <div class="riverbank right-bank" id="right-bank">
+                            <div class="bank-label">RIGHT BANK</div>
+                            <div class="characters-container" id="right-characters">
+                                <!-- Characters will be dynamically injected here -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Algorithm Controls -->
+                    <div class="controls-container">
+                        <button class="simple-btn" id="btn-dfs" onclick="runAlgorithm('DFS')">Run DFS</button>
+                        <button class="simple-btn" id="btn-bfs" onclick="runAlgorithm('BFS')">Run BFS</button>
+                        <button class="simple-btn" id="btn-ast" onclick="runAlgorithm('A*')">Run A*</button>
+                        <button class="simple-btn" id="btn-pause" onclick="togglePause()" disabled>Pause</button>
+                        <button class="simple-btn reset-btn" onclick="resetSimulation()">Reset</button>
+                    </div>
+
+                    <!-- State Display -->
+                    <div class="state-display">
+                        <div class="stat-box">
+                            <span class="stat-label">Algorithm:</span>
+                            <span class="stat-value" id="disp-algo">None</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Step:</span>
+                            <span class="stat-value" id="disp-step">0</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">State:</span>
+                            <span class="stat-value" id="disp-state">Left: 3M 3C | Right: 0M 0C | Boat: Left</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">States Explored:</span>
+                            <span class="stat-value" id="disp-explored">0</span>
+                        </div>
+                    </div>
+                    <div class="message-display" id="message-display">Ready</div>
+                </div>
+
+                <div class="exp-column">
+                    <!-- Teaching Panels -->
+                    <div id="alg-info-badge" class="alg-info-badge"></div>
+
+                    <div class="teaching-panels">
+                        <div class="panel-box">
+                            <h4>Current Move</h4>
+                            <p id="panel-move">Waiting to start...</p>
+                        </div>
+                        <div class="panel-box">
+                            <h4>Why This Move?</h4>
+                            <p id="panel-reason">Waiting to start...</p>
+                        </div>
+                        <div class="panel-box">
+                            <h4>Algorithm Logic</h4>
+                            <p id="panel-logic">Select an algorithm to begin.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Algorithms Explanation Section -->
+        <section class="algorithms-section">
+            <div class="algo-card simple-panel" id="card-dfs">
+                <h2>Depth-First Search (DFS)</h2>
+                <p>DFS explores deeply before backtracking. It goes as far down a path as possible before returning to explore other paths.</p>
+                <div class="highlight-box">
+                    <span>Key Trait: Memory efficient, but not optimal. Can find long, winding paths.</span>
+                </div>
+            </div>
+            
+            <div class="algo-card simple-panel" id="card-bfs">
+                <h2>Breadth-First Search (BFS)</h2>
+                <p>BFS explores level-by-level. It expands all nodes at the current depth before moving to the next level.</p>
+                <div class="highlight-box">
+                    <span>Key Trait: Always finds the shortest path (optimal), but uses more memory.</span>
+                </div>
+            </div>
+            
+            <div class="algo-card simple-panel" id="card-ast">
+                <h2>A* Search</h2>
+                <p>A heuristic-based intelligent search that combines the cost to reach a state and the estimated cost to the goal.</p>
+                <div class="highlight-box">
+                    <span class="formula">f(n) = g(n) + h(n)</span>
+                    <p>Smarter exploration, finding the optimal path quickly.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Comparison Section -->
+        <section class="comparison-section simple-panel">
+            <h2 class="text-center">Algorithm Comparison</h2>
+            <div class="comparison-grid">
+                <div class="comp-item">
+                    <h3>DFS</h3>
+                    <ul>
+                        <li><strong>Optimality:</strong> No</li>
+                        <li><strong>Speed:</strong> Variable</li>
+                        <li><strong>Memory:</strong> Low (O(bm))</li>
+                        <li><strong>Style:</strong> Deep dive & backtrack</li>
+                    </ul>
+                </div>
+                <div class="comp-item">
+                    <h3>BFS</h3>
+                    <ul>
+                        <li><strong>Optimality:</strong> Yes</li>
+                        <li><strong>Speed:</strong> Fast for shallow goals</li>
+                        <li><strong>Memory:</strong> High (O(b^d))</li>
+                        <li><strong>Style:</strong> Expanding ripples</li>
+                    </ul>
+                </div>
+                <div class="comp-item">
+                    <h3>A* Search</h3>
+                    <ul>
+                        <li><strong>Optimality:</strong> Yes</li>
+                        <li><strong>Speed:</strong> Generally Fastest</li>
+                        <li><strong>Memory:</strong> Medium</li>
+                        <li><strong>Style:</strong> Goal-directed</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer simple-panel">
+            <h3 class="text-center">Problem Successfully Solved Using Artificial Intelligence Search Algorithms</h3>
+            <p class="text-center thank-you">Thank You for Exploring!</p>
+        </footer>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
