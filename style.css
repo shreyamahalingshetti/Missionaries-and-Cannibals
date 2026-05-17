@@ -421,26 +421,121 @@ body {
 
 /* Responsive */
 @media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+        gap: 1rem;
+    }
+
+    .simple-panel {
+        padding: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .hero-section h1 {
+        font-size: 1.3rem;
+        line-height: 1.3;
+    }
+
+    .subtitle {
+        font-size: 0.95rem;
+    }
+
+    .legend {
+        gap: 0.75rem;
+        font-size: 0.95rem;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
     .simulation-area {
-        height: 200px;
+        height: 160px;
     }
+
+    .bank-label {
+        font-size: 0.65rem;
+        letter-spacing: 1px;
+    }
+
     .boat {
-        font-size: 2rem;
+        font-size: 1.8rem;
     }
+
+    .boat-label {
+        font-size: 0.7rem;
+    }
+
     .characters-container {
-        font-size: 1.5rem;
+        font-size: 1.2rem;
+        gap: 4px;
     }
-    .glowing-btn {
-        padding: 8px 16px;
-        font-size: 1rem;
+
+    .riverbank {
+        width: 28%;
+        padding: 4px;
+    }
+
+    .simple-btn {
+        padding: 8px 14px;
+        font-size: 0.85rem;
+    }
+
+    .controls-container {
+        gap: 0.5rem;
+    }
+
+    .state-display {
+        padding: 10px;
+        gap: 8px;
+    }
+
+    .stat-label {
+        font-size: 0.75rem;
+    }
+
+    .stat-value {
+        font-size: 0.9rem;
+    }
+
+    .message-display {
+        font-size: 0.95rem;
+    }
+
+    .panel-box {
+        padding: 0.9rem;
+    }
+
+    .panel-box h4 {
+        font-size: 0.85rem;
+    }
+
+    .panel-box p {
+        font-size: 0.9rem;
+    }
+
+    .alg-info-badge {
+        font-size: 0.8rem;
+        padding: 0.4rem 0.6rem;
+    }
+
+    .algorithms-section {
+        grid-template-columns: 1fr;
+    }
+
+    .comparison-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .thank-you {
+        font-size: 1.1rem;
     }
 }
 
 /* Layout for side-by-side */
 .vis-layout {
     display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 2rem;
+    grid-template-columns: 3fr 2fr;
+    gap: 1.5rem;
 }
 
 .sim-column {
@@ -462,9 +557,44 @@ body {
     margin-top: 0;
 }
 
-/* Responsive side-by-side */
-@media (max-width: 992px) {
+/* Responsive side-by-side — stack at tablet size */
+@media (max-width: 900px) {
     .vis-layout {
         grid-template-columns: 1fr;
     }
+
+    .exp-column {
+        border-top: 1px solid #333;
+        padding-top: 1rem;
+    }
+
+    .vis-layout .teaching-panels {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.75rem;
+    }
 }
+
+@media (max-width: 480px) {
+    .vis-layout .teaching-panels {
+        grid-template-columns: 1fr;
+    }
+
+    .simulation-area {
+        height: 140px;
+    }
+
+    .boat {
+        font-size: 1.5rem;
+    }
+
+    .characters-container {
+        font-size: 1rem;
+    }
+
+    .simple-btn {
+        padding: 7px 10px;
+        font-size: 0.78rem;
+    }
+}
+
